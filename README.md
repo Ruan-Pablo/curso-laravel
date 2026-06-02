@@ -35,9 +35,249 @@ composer create-project laravel/laravel nome-app
 ```
 - assim ele cria uma pasta dentre da www no laragon
 
-
 **Vscode**
 
+## Estrutura de pastas
+- .env - informações sensíveis
+- artisan - rodar comandos para simplificar tarefas (igual scritps)
+- composer.json - igual package-json, cuida das dependencias
+- package.json - para as dependencias de pacotes do js
+- pasta public -  documento root, ponto de partida
+- bootstrap - arquivos de inicialização
+- config - arquivos de configuração do framework
+- vendor - armazena tudo que for gerenciaod pelo composer (semelhante ao node_modules)
+- routes - arquivos de rota normal, para criar abserveces
+- database - definição do banco dedados
+- resources - onde fica as views
+- storage - conteúdos de log, processaods durante a aplicação
+- app - onde fica a parte lógica de desenvolvimento
+
+## Artisan
+Arquivo para utilizar linhas de comandos. Útil para desenvolver scripts
+
+Possui seus próprios comandos
+
+- `php artisan list`: lista possíveis comandos
+- `php artisan serve`: executa um servidor próprio do Laravel
+- `php artisan down`: deixa em modo de manutenção 
+- `php artisan up`: sobe dnv 
+- `php artisan help`: mostra comandos
+- `php artisan help migrate`: mostra detalhes do comando
+
+
+## MVC
+
+O Laravel utiliza a arquitetura MVC por padrão. Model-View-Controller
+- Model manipula o Banco de dados.
+- Controller recebe requisição, coordena toda a lógica e se comunica com Model e View.. 
+- View responde com html.
+
+## Introdução a Rotas
+
+Métodos HTTP: GET, POST, PUT, PATCH, DELETE
+
+### any e match
+
+- Any: aceita qualquer método HTTP
+```laravel
+Route::any('/any', function(){
+    return "Permite todo tipo de acesso http";
+});
+```
+
+- Match: so aceita métodos definidos
+```laravel
+Route::match([GET, POST],'/match', function(){
+    return "Permite acesso apenas a método http especificado no [ ]";
+});
+```
+
+### Passagem de parametro
+
+```laravel
+Route::get('/produto/{id}/{categoria?}', function($id, $categoria = "indefinida"){
+    return "Produto: ".$id."<br>"."A categoria é: ".$categoria;
+});
+```
+- aqui tem exemplo tbm de parametro opcional **"?"** e valor **default**
+
+### Redirect e view
+
+
+### Nomeado Rotas
+
+`->(name);`
+
+```
+Route::get('news', function(){
+    return "Rota NOMEADA";
+})->name('noticias'); // nomeando a rota
+// utilzando o nome como referencia para acessar a rota
+Route::get('novidades', function(){
+    return redirect()->route('noticias');
+});
+```
+- Interessante dessa situação é que mesmo que altere a rota '/news', sempre que acessar a rota '/novidades' irá redirecionar para a rota que NOMEADA
+
+### Grupo de Rotas
+
+- Agrupamento por rotas
+```
+Route::prefix('admin')->group(function(){
+    Route::get('/', function(){
+        return "Página principal do admin";
+    });
+    Route::get('profile', function(){
+        return "Perfil do admin";
+    });
+    Route::get('settings', function(){
+        return "Configurações do admin";
+    });
+});
+```
+
+- Agrupamento por nomes
+```
+Route::name('admin.')->group(function(){
+    Route::get('/admin', function(){
+        return "Página principal do admin";
+    })->name('main');
+    Route::get('admin/profile', function(){
+        return "Perfil do admin";
+    });->name('profile');
+    Route::get('admin/settings', function(){
+        return "Configurações do admin";
+    });->name('settings');
+});
+```
+
+## Controller
+Camada responsável pela lógica e controlle da aplicação
+
+Para criar um controller é necessário:
+- Abrir o terminal
+- `php artisan make:controller NOMEController`
+
+O nome do controller tem uma conversão de sem **sempre no singular** e ter o sufixo **Controller**.
+Esse controller criado, extende o Controller base e ja utiliza o Illuminate. E ja é criado o **namespace** MUITO importante para referenciar o controller.
+
+> [!NOTE]
+> **Illuminate**: estrutura principal do Laravel que agrupa todos os componentes e bibliotecas que fazer o framework funcionar.
+
+### Passando Parâmetro para o Controller
+
+igual na rota e recebe no controller na função em que está sendo chamada
+
+```Laravel
+// Rota
+use App\Http\Controllers\ProdutoController;
+Route::get('/param/{id?}', [ProdutoController::class, 'show'])->name('produto.show');
+
+// Controller
+class ProdutoController extends Controller
+{
+    public function show($id = null){
+        return "Show: ". $id;
+    }
+}
+```
+### Criando Controller com Resource
+
+- `php artisan make:controller ProdutoResourceController --resource`
+
+Já cria o Controller com alguns métodos genéricos
+- index: Lista todos os registros5
+- create: Exibir formulário de criação
+- store: Salvar novo registro no banco
+- show: Exibe UM registro específico
+- edit: Exibir formulário de edição
+- update: Atualizar registro no banco
+- destroy: Deletar registro no banco
+
+Além disso, utilizando ``Route::resource()` ele já crias as rotas:
+```Route::resource('produtos', ProdutoResourceController::class); ```
+
+`php artisan route:list`
+| Método | URI | Nome da Rota | Controller |
+|--------|-----|--------------|------------|
+| GET\|HEAD | produtos | produtos.index | ProdutoResourceController@index |
+| POST | produtos | produtos.store | ProdutoResourceController@store |
+| GET\|HEAD | produtos/create | produtos.create | ProdutoResourceController@create |
+| GET\|HEAD | produtos/{produto} | produtos.show | ProdutoResourceController@show |
+| PUT\|PATCH | produtos/{produto} | produtos.update | ProdutoResourceController@update |
+| DELETE | produtos/{produto} | produtos.destroy | ProdutoResourceController@destroy |
+| GET\|HEAD | produtos/{produto}/edit | produtos.edit | ProdutoResourceController@edit |
+
+
+## Configurando Banco de dados
+
+.env possui configuração setada:
+DB_CONNECTION=sqlite
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+
+além disso, em [config/database](config/database.php) possui configurações predefinidas para `DB_CONNECTION` como: `sqlite`, `mysql`, `postgresql`
+
+pra criar uma nova tabela:
+- inicia o mysql 3306
+- abri o HeidiSQL
+- Inicia o banco Laragon.MySQL
+- daí cria o banco com a mesma coleção que está setada no database.php
+- `'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),`
+- dps, se necessário, muda o nome do banco no arquivo `.env` em `DB_NAME`
+
+## Migrations
+
+para trabalhar com as tabelas do banco de dados: criar, alterar e excluir. 
+eles possuem dois métodos, up e donw. Quando a migration é executada, o up é assionado, e quando é feito o reverso na migration, o down é assionado. up usa o método create, pra criar a tabela
+
+**UP:**
+- usa método create para criar tabelas
+**DOWN**:
+- exclui tudo menos a tabela *migrate* que armazena infromações sobre as migrates
+
+Comandos terminais de migrates:
+- `php artisan migrate`: EXECUTA OS MIGRATIONS, os up
+- `php artisan migrate:rollback`: APAGA AS MIGRATIONS, com down, MANTÉM A TABELA MIGRATION
+- `php artisan migrate:status`: STATUS DE CADA MIGRATION
+
+> são feitos para funcionar de forma sequencial, então um pode depender do outro
+
+### Criando
+
+- `php atisan make:migration create_nome_table`
+prefixo `create` e sufixo `table` já tráz algumas predefinições
+
+- `php artisan make:migration nome_tabela --create=nome_tabela`
+perminte colocar o nome do arquivo sem prefixo e sufixo, além de fazer a mesma coisa
+
+### Trabalhando com Migration
+
+Executar as migrations: `php artisan migrate`
+
+Para editar o nome de uma tabela: `Schema::rename('nome_tabela','novo_nome')` 
+
+Para **excluir**: `Schema::dropIfExists('tabela_exclui')`
+
+### Reset Refresh e Fresh
+
+`php artisan migrate:rollback`: reverte a ULTIMA migração
+`php artisan migrate:reset`: rolling back em TODAS as migrations, "apaga" as tabelas das migrations
+`php artisan migrate:refresh`: faz o reset e re-executa as migrations
+`php artisan migrate:fresh`: ele faz DROP nas tabelas e re-executa
+
+
+
+
+
+
+
+
+
+---
 ## Referencia
 - Esse estudo esta sendo feito acompanhando a seguinte playlist no youtube.
 Playlist: [Curso de Laravel](https://www.youtube.com/watch?v=SnOlhaJTMTA&list=PLwXQLZ3FdTVH5Tb57_-ll_r0VhNz9RrXb)
