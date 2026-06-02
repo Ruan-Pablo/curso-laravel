@@ -244,7 +244,7 @@ Comandos terminais de migrates:
 - `php artisan migrate:rollback`: APAGA AS MIGRATIONS, com down, MANTÉM A TABELA MIGRATION
 - `php artisan migrate:status`: STATUS DE CADA MIGRATION
 
-> são feitos para funcionar de forma sequencial, então um pode depender do outro
+> são feitos para funcionar de forma SEQUENCIAL, então um pode depender do outro
 
 ### Criando
 
@@ -269,12 +269,16 @@ Para **excluir**: `Schema::dropIfExists('tabela_exclui')`
 `php artisan migrate:refresh`: faz o reset e re-executa as migrations
 `php artisan migrate:fresh`: ele faz DROP nas tabelas e re-executa
 
-
-
-
-
-
-
+### Modificando Colunas
+Pra fazer modificações nas colunas das migrations por uma migrate é necessário instalar uma biblioteca:
+- `composer require doctrine/dbal`
+assim é possível fazer alterações no nome, tamanho e etc, na coluna.
+```laravel
+Schema::table('modificar_nomee', function(Blueprint $tabel){
+    $table->rename('nomee', 'nome');
+    $table->drop('nomecompleto');
+})
+```
 
 
 ---

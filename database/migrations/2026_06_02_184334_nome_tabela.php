@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('nome_tabela', function (Blueprint $table) {
             $table->id();
+            $table->string('nome', 100);
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nome_tabela');
+        //
     }
 };

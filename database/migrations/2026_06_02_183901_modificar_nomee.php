@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nome_tabela', function (Blueprint $table) {
+        Schema::create('modificar_nomee', function (Blueprint $table) {
             $table->id();
+            $table->string('nomee', 100);
+            $table->string('nomecompleto', 100);
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nome_tabela');
+        Schema::dropIfExists('modificar_nomee');
     }
 };
