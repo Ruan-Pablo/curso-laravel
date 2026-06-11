@@ -280,6 +280,33 @@ Schema::table('modificar_nomee', function(Blueprint $tabel){
 })
 ```
 
+## Entendendo os Models
+
+Criando um model: `php artisan make:model Produto` 
+O Laravel assume automaticamente que:
+
+> Model Produto → tabela produtos (plural do nome do model em minúsculo)
+
+### Criando tabelas Users, Categorias e Produtos
+
+## Seeders
+
+Automatiza o processo de dados para testes no desenvolvimento.
+
+`php artisan make:seeder UserSeeder`
+
+No *Seeder* existe apenas 1 método: `run()` para executar uma tarefa em determinada tabela, seja inserção em massa ou deleção..
+
+#### DatabaseSeeder
+
+O *DatabaseSeeder* faz a execução de todos os Seeders presentes.
+
+```laravel
+$this->call([
+    UserSeeder::class,
+]);
+
+```
 
 ---
 ## Referencia
@@ -288,7 +315,7 @@ Playlist: [Curso de Laravel](https://www.youtube.com/watch?v=SnOlhaJTMTA&list=PL
 
 
 ---
-
+<!-- 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -347,4 +374,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->

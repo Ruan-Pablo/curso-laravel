@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
-use App\Models\Produto;
 
-class ProdutoResourceController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // return "Index";
-        $produto = Produto::all(); // ::all()- método do Eloquent
-        return dd($produto); // debug: dump and die - exibe o conteúdo da variável e para a execução
+        //
     }
 
     /**
@@ -36,7 +34,7 @@ class ProdutoResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Categoria $categoria)
     {
         //
     }
@@ -44,7 +42,7 @@ class ProdutoResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Categoria $categoria)
     {
         //
     }
@@ -52,7 +50,7 @@ class ProdutoResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Categoria $categoria)
     {
         //
     }
@@ -60,7 +58,7 @@ class ProdutoResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categoria $categoria)
     {
         //
     }
