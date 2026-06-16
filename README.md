@@ -307,6 +307,23 @@ $this->call([
 ]);
 
 ```
+## Factory
+Para inserir registros em massa de forma automática apenas para testes. Nele é definido os valores que serão randomizados.
+
+Para criar o Factory: ´php artisan make:factory nomeFactory´
+
+Após a definição ele é carregado "x" vezes no Seeder, que por sua vez é chamado no DatabaseSeeder
+
+> Na criação do nome desses componentes é utilizado por convenção
+> - singular em *Factory*
+> - plural em *Seeders*
+
+- No seeder é comum que seja assim:
+```laravel
+
+```
+
+
 
 ---
 ## Referencia
