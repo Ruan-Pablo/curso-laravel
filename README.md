@@ -370,6 +370,26 @@ return view('perfil', compact('nome', 'idade', 'html'));
 - `{!! $html !!}`: interpreta o html
 - `{{ $text }}`: ignora tudo e mostra em formato de texto
 
+### Section, Yield e Extends
+> Diretivas
+
+**@extends**
+Define que a view atual vai herdar o layout de outra view (o template pai). fica sempre na primeira linha da view filha.
+
+*Exemplo*: `@extends('layouts.app')` → "Essa página vai usar o layout app.blade.php como base"
+
+**@section**
+Define um bloco de conteúdo que vai ser injetado no layout. Fica nas views filhas (que estendem um layout).
+
+*Exemplo:* `@section('content') <h1>Meu conteúdo</h1> @endsection` → "Esse conteúdo vai ocupar o lugar do `@yield('content')` no layout"
+
+**@yield**
+Marca um espaço no layout onde o conteúdo das `@section` vai ser inserido. Fica no layout pai (o template que vai ser estendido)
+
+*Exemplo*: `@yield('content')` → "Aqui vai entrar todo o conteúdo que as views filhas colocarem dentro de `@section('content')`"
+
+
+
 ---
 ## Referencia
 - Esse estudo esta sendo feito acompanhando a seguinte playlist no youtube.

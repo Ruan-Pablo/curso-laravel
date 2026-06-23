@@ -14,7 +14,7 @@ class PerfilResourceController extends Controller
         $nome = "Lucas";
         $idade = 30;
         $html = "<h1>Perfil</h1>";
-        return view('perfil', compact('nome', 'idade', 'html'));
+        return view('site.home', compact('nome', 'idade', 'html'));
         // return view('perfil', [
         //     'nome' => $nome,
         //     'idade' => $idade
