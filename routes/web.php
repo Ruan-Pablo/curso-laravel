@@ -92,3 +92,6 @@ use App\Http\Controllers\ProdutoResourceController;
 
 // Controller Resource
 Route::resource('produtos', ProdutoResourceController::class); // gera rotas para as
+
+use App\Http\Controllers\PerfilResourceController;
+Route::resource('perfil', PerfilResourceController::class); // gera rotas para as

@@ -343,6 +343,33 @@ modos de criação:
     - Pega todos os id da tabela users como uma coleção: [1, 2, 3, 4, 5]
     - `->random()` → Sorteia UM id aleatório dessa coleção
     - Pra vincular cada produto a um usuário existente
+
+## Relacionamentos
+
+1:1: contatos
+- contatos:users
+- contatos possui `foreign key` de user
+
+N:N: regra_user
+- regras:Users
+- é criado uma tabela `regra_user` que relaciona as duas tabelas. Com a cheva estrangeira de regras e de users
+
+migration regras cria duas tabelas: regras e regra_user
+
+## Introdução a Views
+rederiza o HTML. acessa Route->Controller->view
+- .blade é um sistema de templates do laravel
+
+pode ser passado parametros para a view:
+```laravel
+// no Controller
+[...]
+return view('perfil', compact('nome', 'idade', 'html'));
+```
+
+- `{!! $html !!}`: interpreta o html
+- `{{ $text }}`: ignora tudo e mostra em formato de texto
+
 ---
 ## Referencia
 - Esse estudo esta sendo feito acompanhando a seguinte playlist no youtube.
