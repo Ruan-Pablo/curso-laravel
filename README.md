@@ -323,8 +323,26 @@ Após a definição ele é carregado "x" vezes no Seeder, que por sua vez é cha
 
 ```
 
+## mfscr
 
+modos de criação:
+- `php artisan make:model Exemplo -migration - factory -seeder -controller --resorce`
+- `php artisan make:model Exemplo mfscr`
 
+### Factory Produtos e StrSlug
+-`'preco' => $this->faker->randomNumber(2)`
+    - Gera um número aleatório com até 2 dígitos (0 a 99)
+    - Melhor usar: $this->faker->randomFloat(2, 10, 1000) - dois decimais entre 10 e 1000
+- `'slug' => \Str::slug($nome)`
+    - Converte o nome em uma URL amigável
+    - Exemplo: "Camisa Azul" → "camisa-azul"
+- `'imagem' => $this->faker->imageUrl(400, 400)`
+    - Gera uma URL falsa de uma imagem com 400x400 pixels
+    - Exemplo: "https://picsum.photos/seed/12345/400/400"
+- `'id_user' => User::pluck('id')->random()`
+    - Pega todos os id da tabela users como uma coleção: [1, 2, 3, 4, 5]
+    - `->random()` → Sorteia UM id aleatório dessa coleção
+    - Pra vincular cada produto a um usuário existente
 ---
 ## Referencia
 - Esse estudo esta sendo feito acompanhando a seguinte playlist no youtube.
