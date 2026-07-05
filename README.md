@@ -356,7 +356,7 @@ N:N: regra_user
 
 migration regras cria duas tabelas: regras e regra_user
 
-## Introdução a Views
+## Introdução a Views (blade)
 rederiza o HTML. acessa Route->Controller->view
 - .blade é um sistema de templates do laravel
 
@@ -388,6 +388,39 @@ Marca um espaço no layout onde o conteúdo das `@section` vai ser inserido. Fic
 
 *Exemplo*: `@yield('content')` → "Aqui vai entrar todo o conteúdo que as views filhas colocarem dentro de `@section('content')`"
 
+
+### Comentários e Operador Ternário (e valor padrão)
+**Comentario:**
+- `{{-- comentario --}}` 
+**Operador Ternário**
+- `isset()`: se existe
+- `isset($tal) ? 'true' : 'false'`
+**Valor padrão (pra definir variável):**
+- `{{ $variavel ?? 'padrão' }}`
+
+
+### Customizar Erros
+- Cria uma pasta em `views` com o nome *'errors'*
+- Adiciona o arquivo nomeado com o código do erro. *Exemplo*: `404.blade.php`
+
+
+### Estruturas de Controle (blade)
+
+- `if, else`
+- `unless else`: se for falso ele entra na condição
+- `switch case`
+- `isset`: verifica se existe a variável
+- `empty`: verifica se a variável está vazia
+- `auth`: verifica se o usuário está autenticado
+- `guest`: verifica se o usuário não está autenticado
+
+### Estruturas de Repetição
+@php: para definir variáveis em uma linha e codigo php
+
+- `for`
+- `while`
+- `foreach`: para listas
+- `forelse`: for com else
 
 
 ---

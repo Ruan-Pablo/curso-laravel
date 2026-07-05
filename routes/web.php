@@ -95,3 +95,6 @@ Route::resource('produtos', ProdutoResourceController::class); // gera rotas par
 
 use App\Http\Controllers\PerfilResourceController;
 Route::resource('perfil', PerfilResourceController::class); // gera rotas para as
+
+use App\Http\Controllers\HomeResourceController;
+Route::get('/home', [HomeResourceController::class, 'index']);
