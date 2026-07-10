@@ -465,7 +465,7 @@ Marca um espaço no layout onde o conteúdo das `@section` vai ser inserido. Fic
 
 o que tá na push mostra na stack
 
-    @push ----> @stack
+    @push(codigo/link) ----> @stack(sobre alteração)
 
 - então eu posso ter a pag1, pag2, pag3 cada um com seu link de Style ou Script que enviam para o masmo layout
 
@@ -475,6 +475,12 @@ O Laravel, por padrão, ele compila as view por demanda, escolhe o melhor moment
 
 - `php artisan view:cache`: força pré compilar(não recomendado)
 - `php artisan view:clear`: limpar o cache das views. Em casos de está travado e não está atualizando as modificações realizadas
+
+### Implementando Materialize CSS
+
+Será implementado vai CDN(*carregar diretamente dos servidores*), pegando apenas os links para a utilização.
+
+importação e utilização atravez do [site](https://materializecss.com/)
 
 
 
