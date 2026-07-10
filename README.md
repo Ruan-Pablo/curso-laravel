@@ -422,6 +422,52 @@ Marca um espaço no layout onde o conteúdo das `@section` vai ser inserido. Fic
 - `foreach`: para listas
 - `forelse`: for com else
 
+### Include e Component
+
+**Include** vai na pagina de destino, na inteção de incluir outra "pagina" onde o `include` está sendo chamado.
+*Exemplo*:
+```laravel
+# view/includes/mensagem.blade.php
+<h1>{{ $titulo }}</h1>
+<p>mensagem</p>
+```
+```laravel
+# view/layout.blade.php
+    @include('includes.mensagem', ['titulo' => 'Mensagem de Teste'])
+```
+- parametro com mensagem dinamica
+
+
+**Component** é praticamente a mesma coisa do include, mas existe a possibilidade de enviar de voltar mensagem dinamica com `@slot`
+```laravel
+# view/component/sidebar.blade.php
+<div style="background-color: #050505; padding: 20px;">
+    <h2>{{ $titulo }}</h2>
+    <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+    </ul>
+</div>
+```
+```laravel
+# view/layout.blade.php
+    @component('components.sidebar')
+        @slot('titulo')
+            Titulo Sidebar
+        @endslot
+    @endcomponent
+```
+
+### Stack e Push
+
+> Controlam em quais views que seram rederizados stilos, scripts ou arquivos externos
+
+o que tá na push mostra na stack
+
+    @push ----> @stack
+
+- então eu posso ter a pag1, pag2, pag3 cada um com seu link de Style ou Script que enviam para o masmo layout
 
 ---
 ## Referencia
