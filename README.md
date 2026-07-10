@@ -469,6 +469,15 @@ o que tá na push mostra na stack
 
 - então eu posso ter a pag1, pag2, pag3 cada um com seu link de Style ou Script que enviam para o masmo layout
 
+### Viewcache e Viewclear
+
+O Laravel, por padrão, ele compila as view por demanda, escolhe o melhor momento para compilar as view e ele se encarrega de verificar se a view foi atualizada, se foi modificada, pra verificar se há a necessidade dele recompilar a view.
+
+- `php artisan view:cache`: força pré compilar(não recomendado)
+- `php artisan view:clear`: limpar o cache das views. Em casos de está travado e não está atualizando as modificações realizadas
+
+
+
 ---
 ## Referencia
 - Esse estudo esta sendo feito acompanhando a seguinte playlist no youtube.
