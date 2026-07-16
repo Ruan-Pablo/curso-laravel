@@ -97,7 +97,7 @@ use App\Http\Controllers\PerfilResourceController;
 Route::resource('perfil', PerfilResourceController::class); // gera rotas para as
 
 use App\Http\Controllers\HomeResourceController;
-Route::get('/home', [HomeResourceController::class, 'index']);
+Route::get('/home', [HomeResourceController::class, 'index'])->name('site.home');
 
 use App\Http\Controllers\SiteController;
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
