@@ -13,8 +13,10 @@ class ProdutoResourceController extends Controller
     public function index()
     {
         // return "Index";
-        $produto = Produto::all(); // ::all()- método do Eloquent
-        return dd($produto); // debug: dump and die - exibe o conteúdo da variável e para a execução
+        $produto = Produto::all();
+
+        // return view('site.produto');
+        return view('site.produto');
     }
 
     /**
