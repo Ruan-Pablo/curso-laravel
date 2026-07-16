@@ -19,6 +19,11 @@
     </div>
     @endforeach
 
+    <div class="row"></div>
+    <div class="row center">
+        {{ $produtos->links('custom.pagination') }}
+
+    </div>
 </div>
 
 @endsection

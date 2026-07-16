@@ -12,10 +12,8 @@ class ProdutoResourceController extends Controller
      */
     public function index()
     {
-        // return "Index";
-        $produtos = Produto::all();
+        $produtos = Produto::paginate(3);
 
-        // return view('site.produto');
         return view('site.produto', compact('produtos'));
     }
 
