@@ -13,10 +13,10 @@ class ProdutoResourceController extends Controller
     public function index()
     {
         // return "Index";
-        $produto = Produto::all();
+        $produtos = Produto::all();
 
         // return view('site.produto');
-        return view('site.produto');
+        return view('site.produto', compact('produtos'));
     }
 
     /**
