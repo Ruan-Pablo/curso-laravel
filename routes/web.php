@@ -101,3 +101,5 @@ Route::get('/home', [HomeResourceController::class, 'index']);
 
 use App\Http\Controllers\SiteController;
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
+
+Route::get('/prod/{slug}', [SiteController::class, 'details'])->name('site.details');

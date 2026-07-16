@@ -13,4 +13,11 @@ class SiteController extends Controller
 
         return view('site.produto', compact('produtos'));
     }
+    public function details($slug){
+        // busca um registro onde o campo 'slug' seja igual ao $slug informado
+        // first() : o primeiro que achar
+        $produto = Produto::where('slug', $slug)->first();
+
+        return view('site.details', compact('produto'));
+    }
 }
