@@ -84,7 +84,7 @@ Route::group([
 
 use App\Http\Controllers\ProdutoController;
 
-//               [Controller e método]
+//               ([Controller e método])->nome da rota
 Route::get('/param/{id?}', [ProdutoController::class, 'show'])->name('produto.show');
 
 
@@ -98,3 +98,6 @@ Route::resource('perfil', PerfilResourceController::class); // gera rotas para a
 
 use App\Http\Controllers\HomeResourceController;
 Route::get('/home', [HomeResourceController::class, 'index']);
+
+use App\Http\Controllers\SiteController;
+Route::get('/', [SiteController::class, 'index'])->name('site.index');

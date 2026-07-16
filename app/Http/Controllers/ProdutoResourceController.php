@@ -12,9 +12,7 @@ class ProdutoResourceController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::paginate(3);
-
-        return view('site.produto', compact('produtos'));
+        
     }
 
     /**
