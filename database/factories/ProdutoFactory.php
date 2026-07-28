@@ -27,7 +27,7 @@ class ProdutoFactory extends Factory
             'descricao' => $this->faker->paragraph(),
             'preco' => $this->faker->randomNumber(2),
             'slug' => \Str::slug($nome), // gera uma URL amigavel
-            'imagem' => $this->faker->imageUrl(400, 400),
+            'imagem' => 'https://picsum.photos/400/400',//$this->faker->imageUrl(400, 400),
             'id_user' => User::pluck('id')->random(), // extrai uma informação aleatoria da coluna 'id' da tabela 'users'
             'id_categoria' => Categoria::pluck('id')->random()
         ];
