@@ -101,5 +101,5 @@ Route::get('/home', [HomeResourceController::class, 'index'])->name('site.home')
 
 use App\Http\Controllers\SiteController;
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
-
 Route::get('/prod/{slug}', [SiteController::class, 'details'])->name('site.details');
+Route::get('/categoria/{id}', [SiteController::class, 'categoria'])->name('site.categoria');

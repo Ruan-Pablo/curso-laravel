@@ -16,7 +16,7 @@
     <ul id='dropdown1' class='dropdown-content'>
 
         @foreach ($categoriasMenu as $categoria)
-            <li><a href="#">{{$categoria->nome}}</a></li>
+            <li><a href="{{route('site.categoria', $categoria->id)}}">{{$categoria->nome}}</a></li>
         @endforeach
 
     </ul>
@@ -25,7 +25,7 @@
     <div class="nav-wrapper container">
       <a href="#" class="brand-logo center">Curso Laravel</a>
       <ul id="nav-mobile" class="left">
-        <li><a href="{{route('site.home')}}">Home</a></li>
+        <li><a href="{{route('site.index')}}">Home</a></li>
         <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Categoria<i class="material-icons right">expand_more</i></a></li>
         <li><a href="{{route('site.index')}}">Carrinho</a></li>
       </ul>

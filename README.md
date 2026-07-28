@@ -518,7 +518,56 @@ public function boot(): void
         view()->share('valoresCompartilhadosEntreViews', $valores)
     }
 ```
+- Carregado as categorias no dropdown
+```php
+// layout.blade.php
+@foreach ($categoriasMenu as $categoria)
+    <li><a href="{{route('site.categoria', $categoria->id)}}">{{$categoria->nome}}</a></li>
+@endforeach
+```
 
+## Listar produtos de uma categoria e Mostrar nome de uma categoria
+### Listar produtos de uma categoria
+- criado a rota 
+```php
+// web.php
+Route::get('/categoria/{id}', [SiteController::class, 'categoria'])->name('site.categoria');
+```
+- Fazendao a função
+```php
+// SiteController
+public function categoria($id){ // recebe id da categoria pela rota
+    $categoria = Categoria::find($id); // Busca pelo id automaticamente
+    $produtos = Produto::where('id_categoria', $id)->paginate(3);
+    return view('site.categoria', compact('produtos', 'categoria'));
+}
+```
+- É carregado no blade
+```php
+// categoria.blade.php
+<h5> Categoria: {{$categoria->nome}}</h5>
+@foreach ($produtos as $produto)
+<div class="col s12 m4">
+    <div class="card">
+    <div class="card-image" >
+        <img width="200" height="200" src="{{$produto->imagem}}">
+        <a href="{{ route('site.details', $produto->slug) }}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </div>
+    <div class="card-content">
+        <span class="card-title">{{$produto->nome}}</span>
+        <p>{{Str::limit($produto->descricao, 20)}}</p>
+    </div>
+    </div>
+</div>
+@endforeach
+```
+
+- Formatação do preço no `details.blade` 
+```php
+// datail.blade.php
+{{-- number_format(valor, casas, 'separador_decimal', 'separador_milhar') --}}
+<p>R$ {{number_format($produto->preco, 2, ',','.')}}</p>
+```
 
 ---
 ## Referencia
