@@ -299,7 +299,7 @@ No *Seeder* existe apenas 1 método: `run()` para executar uma tarefa em determi
 
 #### DatabaseSeeder
 
-O *DatabaseSeeder* faz a execução de todos os Seeders presentes.
+O *DatabaseSeeder* faz a execução de todos os Seeders presentes com `php artisan db:seed`.
 
 ```laravel
 $this->call([
@@ -482,6 +482,42 @@ Será implementado vai CDN(*carregar diretamente dos servidores*), pegando apena
 
 importação e utilização atravez do [site](https://materializecss.com/)
 
+
+<!-- ## Listagem de produtos
+
+## Paginação de Resultados
+
+## Criando SiteController
+
+## Listagem de único produto -->
+
+## OneToMany Inverse / belongsTo
+**belognsTo(coluna da tabela)**
+- Ele server para fazer buscas de parametro/valor em um campo de uma tabela. Aqui ele está sendo usado para buscar o id de uma tabela relacionada e retornar essa tabela. `Indicar que o modelo atual possui uma chave estrangeira que aponta para outro modelo`
+- returna a tabela com o mesmo valor na coluna passada por parametro
+
+*Exemplo:*
+```php
+// no Modelo Produto
+public function user() {
+    return $this->belongsTo(User::class, 'id_user');
+} // ao chamar essa função `$produto->user` ela retorna a tabela User com o id passado
+```
+
+## Categorias dinâmicas com viewShare
+
+**Dropdwon**: elemento de caixa de seleção no menu;
+
+pra Carregar essa lista apenas uma vez na inicialização do site, ou seja, ela não precisa ser carregada varias vezess em outros locais, ela fica disponível em todas as partes.
+
+`Providers.AppServiceProvider.php->boot` a função boot é executada ao iniciar o sistema
+```php
+public function boot(): void
+    {
+        $valores = Categoria::all();
+        view()->share('valoresCompartilhadosEntreViews', $valores)
+    }
+```
 
 
 ---

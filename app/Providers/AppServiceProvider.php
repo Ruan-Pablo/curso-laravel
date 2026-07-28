@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Categoria;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $categoriaMenu = Categoria::all();
+        view()->share('categoriasMenu', $categoriaMenu); // aqui é possível acessar essa chave e todas as biose
     }
 }
