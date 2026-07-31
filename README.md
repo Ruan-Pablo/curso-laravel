@@ -1,6 +1,7 @@
 # Estudo de PHP com Laravel <img align="center" alt="Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg">
 
 ###### Este repositorio tem como objetivo documentar o que será estudado sobre Laravel
+- [Vídeo](https://www.youtube.com/watch?v=SnOlhaJTMTA&list=PLwXQLZ3FdTVH5Tb57_-ll_r0VhNz9RrXb)
 
 ## Ambiente
 ### Laragon
@@ -527,7 +528,7 @@ public function boot(): void
 ```
 
 ## Listar produtos de uma categoria e Mostrar nome de uma categoria
-### Listar produtos de uma categoria
+
 - criado a rota 
 ```php
 // web.php
@@ -568,6 +569,22 @@ public function categoria($id){ // recebe id da categoria pela rota
 {{-- number_format(valor, casas, 'separador_decimal', 'separador_milhar') --}}
 <p>R$ {{number_format($produto->preco, 2, ',','.')}}</p>
 ```
+## Carrinho de compras com *darryldecode*
+
+A biblioteca darryldecode/laravel-cart fornece uma API simples e eficiente para gerenciar carrinho de compras no Laravel, com suporte a sessão, persistência personalizada e cálculos automáticos de totais. Com métodos para adicionar, remover, atualizar e calcular total de produtos.
+
+> [!IMPORTANT]
+> a biblioteca **darryldecode** foi descontinuada para a verção 13+ do Laravel. Para adaptação utilizarei a biblioteca `dev-ibizinfo/laravelshoppingcart`.
+
+**Instalação:**
+- `composer require dev-ibizinfo/laravelshoppingcart`
+- A configuração segue o mesmo principio da darryldecode e está disponível no [site](https://packagist.org/packages/dev-ibizinfo/laravelshoppingcart). No site tem algumas diferenças.
+
+
+
+
+
+
 
 ---
 ## Referencia
