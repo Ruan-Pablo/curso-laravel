@@ -106,3 +106,4 @@ Route::get('/categoria/{id}', [SiteController::class, 'categoria'])->name('site.
 
 use App\Http\Controllers\CarrinhoController;
 Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('site.carrinho');
+Route::post('/carrinho', [CarrinhoController::class, 'adicionaCarrinho'])->name('site.addcarrinho');

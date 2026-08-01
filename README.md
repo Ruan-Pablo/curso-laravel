@@ -581,6 +581,43 @@ A biblioteca darryldecode/laravel-cart fornece uma API simples e eficiente para 
 - A configuração segue o mesmo principio da darryldecode e está disponível no [site](https://packagist.org/packages/dev-ibizinfo/laravelshoppingcart). No site tem algumas diferenças.
 
 
+## Adicionando itens no carrinho
+Utilizando a biblioteca Darryldecode/cart
+
+**Criando uma rota (POST)**
+```php
+//web.app
+Route::post('/carrinho', [CarrinhoController::class, 'adicionaCarrinho'])->name('site.addcarrinho');
+```
+**Criando o método**
+```php
+//Http/Controllers/CarrinhoController.php
+public function adicionarCarrinho(Request $req){
+    \Cart::add([
+        'id' => $req->id,
+        'name' => $req->name,
+        'price'=> $req->price,
+        'quantity'=> $req->quantity,
+        'attributes'=> array(
+            'image' => $req->img
+        )
+    ])
+}
+```
+- esse método vai receber os dados via requisição
+
+**No front**
+```php
+// resource/site/details.blade.php
+<form action="{{route('carrinho.adicionar')}}">
+    @csrf
+    
+    <button class="btn orange btn_large">Adicionar ao Carrinho</button>
+</form>
+```
+- action direicionada a rota POST criada
+- diretiva `@csrf`: 
+  - "O `@csrf` gera um input oculto com um token de segurança único, que protege seu formulário contra ataques de falsificação de requisição (CSRF). Sem esse token, a requisição é bloqueada pelo Laravel com erro 419."
 
 
 
