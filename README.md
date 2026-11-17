@@ -620,6 +620,40 @@ public function adicionarCarrinho(Request $req){
   - "O `@csrf` gera um input oculto com um token de segurança único, que protege seu formulário contra ataques de falsificação de requisição (CSRF). Sem esse token, a requisição é bloqueada pelo Laravel com erro 419."
 
 
+## Estilização do Carrinho
+- Tabela de itens no carrinho [carriho](resources/views/site/carrinho.blade.php)
+
+### Passo a Passo do acesso
+1. `Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('site.carrinho');`
+2. 
+```php
+    public function carrinhoLista(){
+        $itens_carrinho =  \Cart::getContent();
+        return view('site.carrinho', compact('itens_carrinho'));
+    }
+
+```
+3. `site.carrinho` é o [carrionho.blade.php](resources/views/site/carrinho.blade.php). O controller encaminha pra ele a lista de itens no carrinho.
+
+## RedirectWith #53
+Redirecionar o usuário para o carrinho e passar uma mensagem
+
+No Controller:
+```php
+return redirect()->route('site.carrinho')->with('sucesso', 'Produto adicionado com sucessso!');
+```
+
+### Adicionando Badge de contagem do carrinho
+
+No Layout, onde fica o menu. contagem ao lado da aba do carrinho
+```php
+<li>
+    <a href="{{route('site.carrinho')}}">
+    Carrinho <span class="new badge blue" data-badge-caption="">{{\Cart::getContent()->count()}}</span> 
+    </a>
+</li>
+```
+
 
 
 

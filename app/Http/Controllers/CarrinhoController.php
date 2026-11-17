@@ -8,7 +8,7 @@ class CarrinhoController extends Controller
 {
     public function carrinhoLista(){
         $itens_carrinho =  \Cart::getContent();
-        dd($itens_carrinho);
+        return view('site.carrinho', compact('itens_carrinho'));
     }
     public function adicionaCarrinho(Request $req){
         \Cart::add([
@@ -20,6 +20,10 @@ class CarrinhoController extends Controller
                 'image' => $req->image
             )
         ]);
-
+        return redirect()->route('site.carrinho')->with('sucesso', 'Produto adicionado com sucessso!');
+    }
+    public function remover_carrinho($id){
+        \Cart::remove($id);
+        return redirect()->route('site.carrinho');
     }
 }
