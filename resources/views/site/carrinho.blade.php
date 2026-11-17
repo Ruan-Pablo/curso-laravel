@@ -32,15 +32,28 @@
                 <td><img src="{{ $item->attributes->image }}" alt="{{ $item->name }}" class="responsive-img circle" width="50"></td>
                 <td>{{$item->name}}</td>
                 <td>R$ {{number_format($item->price, 2, ',', '.')}}</td>
-                <td><input type="number" name="quantity" value="{{$item->quantity}}" min="1" class="white center" style="width: 40px; font-weight:900;"></td>
-                <td>
-                    <button class="btn-floating btn-small waves-effect waves-light orange">
-                        <i class="material-icons">refresh</i>
-                    </button>
-                    <button class="btn-floating btn-small waves-effect waves-light red">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </td>
+
+                  {{-- BTN ATUALIZAR --}}
+                  <form action="{{ route('site.atualizaritemcarrinho') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <td><input type="number" name="quantity" value="{{$item->quantity}}" min="1" class="white center" style="width: 40px; font-weight:900;">
+                    </td>
+                  <td> {{-- <AgrupadoA> --}}
+                    <button class="btn-floating btn-small waves-effect waves-light orange"><i class="material-icons">refresh</i></button>
+                  </form>
+
+
+                    {{-- BTN REMOVER --}} 
+                    <form action="{{ route('site.removeritemcarrinho')}}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <input type="hidden" name="id" value="{{ $item->id }}">
+                      <button class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                      </button>
+                    </td>{{-- </AgrupadoA> --}}
+                    </form>
+
             </tr>
           @endforeach
         </tbody>

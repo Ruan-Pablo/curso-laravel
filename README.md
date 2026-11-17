@@ -653,6 +653,69 @@ No Layout, onde fica o menu. contagem ao lado da aba do carrinho
     </a>
 </li>
 ```
+## Removendo item do carrinho 
+
+Criar função:
+```php
+// CarrinhoController
+public function removerItemCarrinho(Request $req){
+    \Cart::remove($req->id);
+    return redirect()->route('site.carrinho')->with('sucesso', 'Produto removido com sucesso!');
+}
+```
+
+Publicando a função:
+```php
+// web.php
+Route::post('/remover', [CarrinhoController::class, 'removerItemCarrinho'])->name('site.removeritemcarrinho');
+```
+
+Utilizando a função:
+```php
+// carrinho.blade
+<form action="{{ route('site.removeritemcarrinho')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="id" value="{{ $item->id }}">
+    <button class="btn-floating btn-small waves-effect waves-light red">
+        <i class="material-icons">delete</i>
+    </button>
+</form>
+```
+
+## atualizando itens do carrinho
+
+Função
+```php
+// CarrinhoController
+public function atualizarItemCarrinho(Request $req){
+    \Cart::update($req->id, [
+        'quantity' => [
+            'relative' => false,
+            'value' => $req->quantity
+        ],
+    ]);
+    return redirect()->route('site.carrinho')->with('sucesso', 'Produto atualizado com sucesso!');
+}
+```
+Amostra
+```php
+// web.php
+Route::post('/atualizar', [CarrinhoController::class, 'atualizarItemCarrinho'])->name('site.atualizaritemcarrinho');
+```
+Uso
+```php
+// carrinho.blade
+<form action="{{ route('site.atualizaritemcarrinho') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="id" value="{{ $item->id }}">
+    <td><input type="number" name="quantity" value="{{$item->quantity}}" min="1" class="white center" style="width: 40px; font-weight:900;">
+    </td>
+    <td> // {{-- <AgrupadoA> --}} 
+    <button class="btn-floating btn-small waves-effect waves-light orange"><i class="material-icons">refresh</i></button>
+</form>
+```
+- A bagunça é por conta da tabela que fica os icones
+
 
 
 
